@@ -9,6 +9,7 @@
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
         <javafx.version>12-ea+13</javafx.version>
+        <javafx.maven.plugin.version>0.0.1</javafx.maven.plugin.version>
     </properties>
     <dependencies>
         <dependency>
@@ -35,7 +36,7 @@
             <plugin>
                 <groupId>org.openjfx</groupId>
                 <artifactId>javafx-maven-plugin</artifactId>
-                <version>1.0-SNAPSHOT</version>
+                <version>${javafx.maven.plugin.version}</version>
                 <executions>
                     <execution>
                         <goals>
