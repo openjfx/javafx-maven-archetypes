@@ -8,19 +8,17 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
-        <javafx.version>12-ea+13</javafx.version>
-        <javafx.maven.plugin.version>0.0.1</javafx.maven.plugin.version>
     </properties>
     <dependencies>
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-controls</artifactId>
-            <version>${javafx.version}</version>
+            <version>${javafx-version}</version>
         </dependency>
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-fxml</artifactId>
-            <version>${javafx.version}</version>
+            <version>${javafx-version}</version>
         </dependency>
     </dependencies>
     <build>
@@ -36,15 +34,7 @@
             <plugin>
                 <groupId>org.openjfx</groupId>
                 <artifactId>javafx-maven-plugin</artifactId>
-                <version>${javafx.maven.plugin.version}</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>compile</goal>
-                            <goal>run</goal>
-                        </goals>
-                    </execution>
-                </executions>
+                <version>${javafx-maven-plugin-version}</version>
                 <configuration>
                     <mainClass>${package}.App</mainClass>
                 </configuration>
