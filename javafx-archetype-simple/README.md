@@ -20,3 +20,23 @@ mvn archetype:generate \
         -DartifactId=artifactId \
         -Dversion=version
 ```
+
+The following properties can be customized while creating the project:
+
+| Property                    | Default Value |
+| --------------------------- | ------------- |
+| javafx-version              | 11.0.2        |
+| javafx-maven-plugin-version | 0.0.1         |
+
+For example:
+
+```
+mvn archetype:generate \
+        -DarchetypeGroupId=org.openjfx \
+        -DarchetypeArtifactId=javafx-archetype-fxml \
+        -DarchetypeVersion=0.0.1 \
+        -DgroupId=groupid \
+        -DartifactId=artifactId \
+        -Dversion=version
+        -Djavafx-version=12-ea+14
+```
