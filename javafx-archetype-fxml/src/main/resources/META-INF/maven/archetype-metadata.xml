@@ -29,7 +29,7 @@
                 <exclude>module-info.java</exclude>
             </excludes>
         </fileSet>
-        <fileSet filtered="true" encoding="UTF-8">
+        <fileSet filtered="true" packaged="true" encoding="UTF-8">
             <directory>src/main/resources</directory>
             <includes>
                 <include>**/*.fxml</include>
