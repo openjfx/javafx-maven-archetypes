@@ -1,6 +1,14 @@
-# Maven Archetypes for various JavaFX projects
+# Maven Archetypes for JavaFX
 
-The project contains multiple Maven archetypes for creating different types of JavaFX applications.
+Maven archetypes for creating different types of JavaFX application.
+
+[![Maven Central](https://img.shields.io/maven-central/v/org.openjfx/javafx-maven-archetypes.svg?color=%234DC71F)](https://search.maven.org/#search|ga|1|org.openjfx.javafx-maven-archetypes)
+[![BSD-3 license](https://img.shields.io/badge/license-BSD--3-%230778B9.svg)](https://opensource.org/licenses/BSD-3-Clause)
+
+The project is a multi-module Maven project. Each module contains an archetype for creating a JavaFX application.
+
+All projects created via the archetype(s) make use of the [JavaFX Maven plugin](https://github.com/openjfx/javafx-maven-plugin)
+for compiling and running the JavaFX application.
 
 ### Prerequisites
 
