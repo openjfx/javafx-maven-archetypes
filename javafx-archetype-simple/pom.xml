@@ -5,8 +5,8 @@
     <name>Simple JavaFX Maven Archetype</name>
 
     <parent>
-    	<groupId>org.openjfx</groupId>
-    	<artifactId>javafx-maven-archetypes</artifactId>
-    	<version>0.0.1</version>
-	</parent>
+        <groupId>org.openjfx</groupId>
+        <artifactId>javafx-maven-archetypes</artifactId>
+        <version>0.0.1</version>
+    </parent>
 </project>

@@ -6,12 +6,13 @@
     <version>0.0.1</version>
     <packaging>pom</packaging>
     <name>Maven Archetypes for JavaFX</name>
+    <description>Maven archetypes for creating different types of JavaFX application.</description>
     <url>https://openjfx.io</url>
 
     <modules>
-    	<module>javafx-archetype-simple</module>
-    	<module>javafx-archetype-fxml</module>
-  	</modules>
+      <module>javafx-archetype-simple</module>
+      <module>javafx-archetype-fxml</module>
+    </modules>
 
     <build>
       <plugins>
