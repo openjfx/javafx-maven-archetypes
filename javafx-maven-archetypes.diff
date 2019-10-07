@@ -1,0 +1,91 @@
+diff --git a/javafx-archetype-simple/src/main/resources/META-INF/maven/archetype-metadata.xml b/javafx-archetype-simple/src/main/resources/META-INF/maven/archetype-metadata.xml
+index e7eefa8..6a931b9 100644
+--- a/javafx-archetype-simple/src/main/resources/META-INF/maven/archetype-metadata.xml
++++ b/javafx-archetype-simple/src/main/resources/META-INF/maven/archetype-metadata.xml
+@@ -10,7 +10,7 @@
+             <defaultValue>13</defaultValue>
+         </requiredProperty>
+         <requiredProperty key="javafx-maven-plugin-version">
+-            <defaultValue>0.0.3</defaultValue>
++            <defaultValue>0.0.4-SNAPSHOT</defaultValue>
+         </requiredProperty>
+     </requiredProperties>
+     <fileSets>
+diff --git a/javafx-archetype-simple/src/main/resources/archetype-resources/pom.xml b/javafx-archetype-simple/src/main/resources/archetype-resources/pom.xml
+index 1665c72..92c9563 100644
+--- a/javafx-archetype-simple/src/main/resources/archetype-resources/pom.xml
++++ b/javafx-archetype-simple/src/main/resources/archetype-resources/pom.xml
+@@ -6,15 +6,22 @@
+     <version>${version}</version>
+     <properties>
+         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+-        <maven.compiler.source>11</maven.compiler.source>
+-        <maven.compiler.target>11</maven.compiler.target>
++#if ("8" == ${javafx-version})
++            <maven.compiler.source>8</maven.compiler.source>
++            <maven.compiler.target>8</maven.compiler.target>
++#else
++            <maven.compiler.source>11</maven.compiler.source>
++            <maven.compiler.target>11</maven.compiler.target>
++#end
+     </properties>
+     <dependencies>
++#if ("8" != ${javafx-version})
+         <dependency>
+             <groupId>org.openjfx</groupId>
+             <artifactId>javafx-controls</artifactId>
+             <version>${javafx-version}</version>
+         </dependency>
++#end
+     </dependencies>
+     <build>
+         <plugins>
+@@ -23,7 +30,11 @@
+                 <artifactId>maven-compiler-plugin</artifactId>
+                 <version>3.8.0</version>
+                 <configuration>
++#if ("8" == ${javafx-version})
++                    <excludes>module-info.java</excludes>
++#else
+                     <release>11</release>
++#end
+                 </configuration>
+             </plugin>
+             <plugin>
+diff --git a/javafx-archetype-simple/src/main/resources/archetype-resources/src/main/java/App.java b/javafx-archetype-simple/src/main/resources/archetype-resources/src/main/java/App.java
+index 81ba67b..51e3691 100644
+--- a/javafx-archetype-simple/src/main/resources/archetype-resources/src/main/java/App.java
++++ b/javafx-archetype-simple/src/main/resources/archetype-resources/src/main/java/App.java
+@@ -6,6 +6,16 @@ import javafx.scene.control.Label;
+ import javafx.scene.layout.StackPane;
+ import javafx.stage.Stage;
+ 
++#if ("8" == ${javafx-version})
++#set ( $String = 'String')
++#set ( $Label = 'Label')
++#set ( $Scene = 'Scene')
++#else
++#set ( $String = 'var')
++#set ( $Label = 'var')
++#set ( $Scene = 'var')
++#end
++
+ /**
+  * JavaFX App
+  */
+@@ -13,11 +23,11 @@ public class App extends Application {
+ 
+     @Override
+     public void start(Stage stage) {
+-        var javaVersion = SystemInfo.javaVersion();
+-        var javafxVersion = SystemInfo.javafxVersion();
++        ${String} javaVersion = SystemInfo.javaVersion();
++        ${String} javafxVersion = SystemInfo.javafxVersion();
+ 
+-        var label = new Label("Hello, JavaFX " + javafxVersion + ", running on Java " + javaVersion + ".");
+-        var scene = new Scene(new StackPane(label), 640, 480);
++        ${Label} label = new Label("Hello, JavaFX " + javafxVersion + ", running on Java " + javaVersion + ".");
++        ${Scene} scene = new Scene(new StackPane(label), 640, 480);
+         stage.setScene(scene);
+         stage.show();
+     }
