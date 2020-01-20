@@ -10,7 +10,7 @@
             <defaultValue>13</defaultValue>
         </requiredProperty>
         <requiredProperty key="javafx-maven-plugin-version">
-            <defaultValue>0.0.4</defaultValue>
+            <defaultValue>0.0.4-SNAPSHOT</defaultValue>
         </requiredProperty>
     </requiredProperties>
     <fileSets>
