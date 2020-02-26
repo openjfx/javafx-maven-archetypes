@@ -6,9 +6,9 @@
     <version>${version}</version>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-#if ("8" == ${javafx-version})
-            <maven.compiler.source>8</maven.compiler.source>
-            <maven.compiler.target>8</maven.compiler.target>
+#if ("8" == ${javafx-version} || "1.8" == ${javafx-version})
+            <maven.compiler.source>1.8</maven.compiler.source>
+            <maven.compiler.target>1.8</maven.compiler.target>
 #else
             <maven.compiler.source>11</maven.compiler.source>
             <maven.compiler.target>11</maven.compiler.target>
@@ -21,8 +21,10 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.8.0</version>
                 <configuration>
-#if ("8" == ${javafx-version})
-                    <excludes>module-info.java</excludes>
+#if ("8" == ${javafx-version} || "1.8" == ${javafx-version})
+                    <excludes>
+                        <exclude>module-info.java</exclude>
+                    </excludes>
 #else
                     <release>11</release>
 #end
@@ -48,7 +50,7 @@
                 <dependency>
                     <groupId>org.openjfx</groupId>
                     <artifactId>javafx-controls</artifactId>
-#if ("8" == ${javafx-version})
+#if ("8" == ${javafx-version} || "1.8" == ${javafx-version})
                     <version>11</version>
 #else
                     <version>${javafx-version}</version>

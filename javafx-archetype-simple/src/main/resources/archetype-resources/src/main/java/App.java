@@ -6,7 +6,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
-#if ("8" == ${javafx-version})
+#if ("8" == ${javafx-version} || "1.8" == ${javafx-version})
 #set ( $String = 'String')
 #set ( $Label = 'Label')
 #set ( $Scene = 'Scene')
