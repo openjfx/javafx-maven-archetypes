@@ -1,0 +1,18 @@
+language: java
+sudo: false
+
+os: linux
+dist: bionic
+jdk: openjdk11
+
+cache:
+  directories:
+    - $HOME/.m2
+
+services:
+  - xvfb
+
+install: true
+
+script:
+  - mvn clean verify
