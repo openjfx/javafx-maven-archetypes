@@ -14,5 +14,20 @@ services:
 
 install: true
 
+before_install:
+  - DIR=zulu8.40.0.25-ca-fx-jdk8.0.222-linux_x64
+  - URL=https://cdn.azul.com/zulu/bin/zulu8.40.0.25-ca-fx-jdk8.0.222-linux_x64.tar.gz
+  - JDK11=$JAVA_HOME
+  - export JDK11
+  - echo JDK11 is $JDK11
+  - ls -l $JDK11
+  - if [ -n "$URL" ]; then pushd /tmp; curl $URL -o jdk.tgz; tar fxz jdk.tgz; JDK8=`pwd`/$DIR; popd; export JDK8; fi
+  - echo JDK8 is $JDK8
+  - ls -l $JDK8
+
 script:
   - mvn clean verify
+  - echo JDK11 is $JDK11
+  - echo JDK8 is $JDK8
+  - ./.test.sh
+
