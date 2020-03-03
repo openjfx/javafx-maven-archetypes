@@ -16,3 +16,11 @@ install: true
 
 script:
   - mvn clean verify
+    
+deploy:
+  # Deploy releases on every tag push
+  - provider: script
+    script: bash .ci/release.sh
+    skip_cleanup: true
+    on:
+      tags: true
