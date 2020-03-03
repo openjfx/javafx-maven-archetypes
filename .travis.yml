@@ -30,4 +30,11 @@ script:
   - echo JDK11 is $JDK11
   - echo JDK8 is $JDK8
   - ./.test.sh
-
+    
+deploy:
+  # Deploy releases on every tag push
+  - provider: script
+    script: bash .ci/release.sh
+    skip_cleanup: true
+    on:
+      tags: true
