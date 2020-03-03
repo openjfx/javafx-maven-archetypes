@@ -12,7 +12,13 @@ if [ -z "$JDK11" ] || ! [ -f "$JDK11/bin/java" ]; then
   exit 2
 fi
 
+ARCH_VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
+
+echo "Removing local catalog for javafx archetypes version: $ARCH_VERSION"
+rm -rf $HOME/.m2/repository/org/openjfx/*archetype*/$ARCH_VERSION
+
 JAVA_HOME=$JDK8 mvn -q install
+echo "Installation of local catalog for javafx archetypes $ARCH_VERSION successful."
 rm -rf target
 mkdir -p target
 cd target
@@ -32,7 +38,7 @@ function generate8() {
         -DinteractiveMode=false \
         -DarchetypeGroupId=org.openjfx \
         -DarchetypeArtifactId=javafx-archetype-simple \
-        -DarchetypeVersion=0.0.4-SNAPSHOT \
+        -DarchetypeVersion=$ARCH_VERSION \
         -DgroupId=org.openjfx.demo \
         -DartifactId=test$1 \
         -Dversion=1.0-SNAPSHOT \
@@ -55,7 +61,7 @@ function generate11() {
         -DinteractiveMode=false \
             -DarchetypeGroupId=org.openjfx \
         -DarchetypeArtifactId=javafx-archetype-simple \
-        -DarchetypeVersion=0.0.4-SNAPSHOT \
+        -DarchetypeVersion=$ARCH_VERSION \
         -DgroupId=org.openjfx.demo \
         -DartifactId=test11 \
         -Dversion=1.0-SNAPSHOT \
