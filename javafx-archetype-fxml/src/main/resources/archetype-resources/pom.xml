@@ -54,4 +54,26 @@
             </plugin>
         </plugins>
     </build>
+#if ("8" == ${javafx-version} || "1.8" == ${javafx-version})
+    <profiles>
+        <profile>
+            <id>openjfx</id>
+            <activation>
+                <jdk>[11,)</jdk>
+            </activation>
+            <dependencies>
+                <dependency>
+                    <groupId>org.openjfx</groupId>
+                    <artifactId>javafx-controls</artifactId>
+                    <version>11</version>
+                </dependency>
+                <dependency>
+                    <groupId>org.openjfx</groupId>
+                    <artifactId>javafx-fxml</artifactId>
+                    <version>11</version>
+                </dependency>
+            </dependencies>
+        </profile>
+    </profiles>
+#end
 </project>
