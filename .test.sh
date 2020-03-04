@@ -17,8 +17,9 @@ ARCH_VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
 echo "Removing local catalog for javafx archetypes version: $ARCH_VERSION"
 rm -rf $HOME/.m2/repository/org/openjfx/*archetype*/$ARCH_VERSION
 
+echo "Installing local catalog for javafx archetypes version: $ARCH_VERSION"
 JAVA_HOME=$JDK8 mvn -q install
-echo "Installation of local catalog for javafx archetypes $ARCH_VERSION successful."
+echo "Installation of local catalog successful."
 rm -rf target
 mkdir -p target
 cd target
@@ -27,51 +28,41 @@ function setupExit() {
     sed -i -e 's/stage.show();/stage.show();System.exit(0);/g' $1
 }
 
-function generate8() {
-    if [ -z "$1" ]; then
-       echo Expecting argument: $1
+function generate() {
+    if [ -z "$1" ] || [ -z "$2" ]; then
+       echo "Expecting 2 arguments"
        exit 3
     fi
-    echo Generating with javafx-version=$1
+    mkdir -p $2 && cd $2
+    echo Generating $1 with javafx-version=$2
     mvn -q archetype:generate \
         -DarchetypeCatalog=local \
         -DinteractiveMode=false \
         -DarchetypeGroupId=org.openjfx \
-        -DarchetypeArtifactId=javafx-archetype-simple \
+        -DarchetypeArtifactId=$1 \
         -DarchetypeVersion=$ARCH_VERSION \
         -DgroupId=org.openjfx.demo \
-        -DartifactId=test$1 \
+        -DartifactId=test-$1 \
         -Dversion=1.0-SNAPSHOT \
-        -Djavafx-version=$1
-    setupExit test$1/src/main/java/org/openjfx/demo/App.java
+        -Djavafx-version=$2
+    setupExit test-$1/src/main/java/org/openjfx/demo/App.java
 
-    echo "  Launching on JDK8"
-    JAVA_HOME=$JDK8 mvn -q -f test8/ clean package javafx:run
+    if [ $2 != 11 ]; then
+      echo "  Launching on JDK8"
+      JAVA_HOME=$JDK8 mvn -q -f test-$1/ clean package javafx:run
+    else
+      echo "  Launching on JDK8 and expecting failure"
+      (JAVA_HOME=$JDK8 mvn -q -f test-$1 clean package javafx:run && exit 3) || echo Previous failure is expected
+    fi
+
     echo "  Launching on JDK11"
-    JAVA_HOME=$JDK11 mvn -q -f test8/ clean package javafx:run
+    JAVA_HOME=$JDK11 mvn -q -f test-$1/ clean package javafx:run
+    cd ..
 }
 
-generate8 8
-generate8 1.8
-
-function generate11() {
-    echo Generating with javafx-version=11
-    mvn -q archetype:generate \
-        -DarchetypeCatalog=local \
-        -DinteractiveMode=false \
-            -DarchetypeGroupId=org.openjfx \
-        -DarchetypeArtifactId=javafx-archetype-simple \
-        -DarchetypeVersion=$ARCH_VERSION \
-        -DgroupId=org.openjfx.demo \
-        -DartifactId=test11 \
-        -Dversion=1.0-SNAPSHOT \
-        -Djavafx-version=11
-        setupExit test11/src/main/java/org/openjfx/demo/App.java
-
-    echo "  Launching on JDK8 and expecting failure"
-    (JAVA_HOME=$JDK8 mvn -q -f test11 clean package javafx:run && exit 3) || echo Previous failure is expected
-    echo "  Launching on JDK11"
-    JAVA_HOME=$JDK11 mvn -q -f test11 clean package javafx:run
-}
-
-generate11
+generate javafx-archetype-simple 1.8
+generate javafx-archetype-simple 8
+generate javafx-archetype-simple 11
+generate javafx-archetype-fxml 1.8
+generate javafx-archetype-fxml 8
+generate javafx-archetype-fxml 11
