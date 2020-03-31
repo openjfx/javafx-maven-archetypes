@@ -15,28 +15,14 @@ Once you have installed the archetype locally, you can use it to create a new pr
 mvn archetype:generate \
         -DarchetypeGroupId=org.openjfx \
         -DarchetypeArtifactId=javafx-archetype-simple \
-        -DarchetypeVersion=0.0.3 \
         -DgroupId=groupid \
         -DartifactId=artifactId \
-        -Dversion=version
+        -Dversion=1.0-SNAPSHOT
 ```
 
 The following properties can be customized while creating the project:
 
 | Property                    | Default Value |
 | --------------------------- | ------------- |
-| javafx-version              | 13            |
-| javafx-maven-plugin-version | 0.0.3         |
-
-For example:
-
-```
-mvn archetype:generate \
-        -DarchetypeGroupId=org.openjfx \
-        -DarchetypeArtifactId=javafx-archetype-fxml \
-        -DarchetypeVersion=0.0.3 \
-        -DgroupId=groupid \
-        -DartifactId=artifactId \
-        -Dversion=version
-        -Djavafx-version=12-ea+14
-```
+| javafx-version              | 14            |
+| javafx-maven-plugin-version | 0.0.5         |
