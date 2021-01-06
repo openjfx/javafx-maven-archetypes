@@ -37,6 +37,6 @@ mvn archetype:generate \
         -DarchetypeVersion=0.0.3 \
         -DgroupId=groupid \
         -DartifactId=artifactId \
-        -Dversion=version
+        -Dversion=version \
         -Djavafx-version=12-ea+14
 ```
