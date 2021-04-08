@@ -1,16 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<archetype-descriptor
-        xsi:schemaLocation="http://maven.apache.org/plugins/maven-archetype-plugin/archetype-descriptor/1.0.0 http://maven.apache.org/xsd/archetype-descriptor-1.0.0.xsd"
-        name="${rootArtifactId}-parent"
-        xmlns="http://maven.apache.org/plugins/maven-archetype-plugin/archetype-descriptor/1.0.0"
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<archetype-descriptor xmlns="http://maven.apache.org/plugins/maven-archetype-plugin/archetype-descriptor/1.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/plugins/maven-archetype-plugin/archetype-descriptor/1.0.0 http://maven.apache.org/xsd/archetype-descriptor-1.0.0.xsd" name="${rootArtifactId}-parent">
     <requiredProperties>
         <requiredProperty key="javafx-version">
             <defaultValue>13</defaultValue>
         </requiredProperty>
         <requiredProperty key="javafx-maven-plugin-version">
-            <defaultValue>0.0.4</defaultValue>
+            <defaultValue>0.0.5</defaultValue>
         </requiredProperty>
         <requiredProperty key="add-debug-configuration">
             <defaultValue>N</defaultValue>
