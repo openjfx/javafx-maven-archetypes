@@ -15,6 +15,7 @@ services:
 install: true
 
 before_install:
+  - cp .travis.settings.xml $HOME/.m2/settings.xml
   - DIR=zulu8.40.0.25-ca-fx-jdk8.0.222-linux_x64
   - URL=https://cdn.azul.com/zulu/bin/zulu8.40.0.25-ca-fx-jdk8.0.222-linux_x64.tar.gz
   - JDK11=$JAVA_HOME
