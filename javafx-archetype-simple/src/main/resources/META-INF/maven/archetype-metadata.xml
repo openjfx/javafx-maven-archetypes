@@ -5,7 +5,7 @@
             <defaultValue>13</defaultValue>
         </requiredProperty>
         <requiredProperty key="javafx-maven-plugin-version">
-            <defaultValue>0.0.6</defaultValue>
+            <defaultValue>0.0.8</defaultValue>
         </requiredProperty>
         <requiredProperty key="add-debug-configuration">
             <defaultValue>N</defaultValue>
