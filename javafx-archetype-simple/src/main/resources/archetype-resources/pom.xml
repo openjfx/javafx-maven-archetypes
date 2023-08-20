@@ -1,17 +1,21 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
     <modelVersion>4.0.0</modelVersion>
     <groupId>${groupId}</groupId>
     <artifactId>${artifactId}</artifactId>
     <version>${version}</version>
+    <name>${artifactId}</name>
+
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 #if ("8" == ${javafx-version} || "1.8" == ${javafx-version})
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
 #else
-        <maven.compiler.source>11</maven.compiler.source>
-        <maven.compiler.target>11</maven.compiler.target>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
 #end
     </properties>
 #if ("8" != ${javafx-version} && "1.8" != ${javafx-version})
@@ -22,20 +26,22 @@
             <version>${javafx-version}</version>
         </dependency>
     </dependencies>
-#end
+    #end
+
     <build>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.0</version>
+                <version>3.11.0</version>
                 <configuration>
 #if ("8" == ${javafx-version} || "1.8" == ${javafx-version})
                     <excludes>
                         <exclude>module-info.java</exclude>
                     </excludes>
 #else
-                    <release>11</release>
+                    <source>17</source>
+                    <target>17</target>
 #end
                 </configuration>
             </plugin>
@@ -49,7 +55,7 @@
                         <!-- Usage: mvn clean javafx:run -->
                         <id>default-cli</id>
                         <configuration>
-                            <mainClass>${package}.App</mainClass>
+                            <mainClass>${package}/${package}.App</mainClass>
                         </configuration>
                     </execution>
 #if ("Y" == ${add-debug-configuration.toUpperCase()})
@@ -79,18 +85,19 @@
             </plugin>
         </plugins>
     </build>
+
 #if ("8" == ${javafx-version} || "1.8" == ${javafx-version})
     <profiles>
         <profile>
             <id>openjfx</id>
             <activation>
-                <jdk>[11,)</jdk>
+                <jdk>[17,)</jdk>
             </activation>
             <dependencies>
                 <dependency>
                     <groupId>org.openjfx</groupId>
                     <artifactId>javafx-controls</artifactId>
-                    <version>11</version>
+                    <version>${javafx-version}</version>
                 </dependency>
             </dependencies>
         </profile>
